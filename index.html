@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Advanced Birthday – Luna</title>
+<style>
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Arial', sans-serif;
+  overflow: hidden;
+  height: 100vh;
+  perspective: 1500px;
+  color: #000000;
+  background: linear-gradient(135deg, #ffc0cb, #ffffff, #ffc0cb);
+  background-size: 600% 600%;
+  animation: gradientBG 15s ease infinite;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+@keyframes gradientBG {
+  0% {background-position:0% 50%;}
+  50% {background-position:100% 50%;}
+  100% {background-position:0% 50%;}
+}
+
+.page {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 1.2s ease-in-out, opacity 1s ease-in-out;
+  opacity: 0;
+  text-align: center;
+  z-index: 2;
+}
+
+.active {
+  display: flex;
+  opacity: 1;
+}
+
+h1 {
+  font-size: 3rem;
+  color: #000000;
+  text-shadow: 0 0 20px rgba(255,255,255,0.5);
+}
+
+p {
+  font-size: 1.4rem;
+  max-width: 500px;
+  text-align: center;
+  color: #000000;
+  text-shadow: 0 0 10px rgba(255,255,255,0.5);
+}
+
+button {
+  padding: 15px 30px;
+  font-size: 1.2rem;
+  border-radius: 20px;
+  border: none;
+  background: linear-gradient(45deg, #ff4f70, #ff9a9e);
+  color: white;
+  cursor: pointer;
+  margin: 10px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+  transition: transform 0.4s, box-shadow 0.4s, background 0.4s;
+}
+button:hover {
+  transform: translateZ(50px) scale(1.1) rotateX(8deg);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.7);
+  background: linear-gradient(45deg, #ff9a9e, #ff4f70);
+}
+
+img.page-img {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  margin-top: 20px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+}
+
+/* Emoji style */
+.emoji {
+  position: absolute;
+  top: -50px;
+  animation: fall linear infinite;
+  z-index: 1;
+}
+
+@keyframes fall {
+  0% { transform: translateY(0) rotate(0deg); }
+  100% { transform: translateY(110vh) rotate(360deg); }
+}
+
+/* Music Button */
+#playMusic {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  z-index: 10;
+  background: linear-gradient(45deg, #4fafff, #9aafff);
+}
+</style>
+</head>
+<body>
+
+<!-- Music Button -->
+<button id="playMusic">🎵 Jungkook – Still With You</button>
+<audio id="birthdayAudio" loop>
+  <source src="lunah.mp3" type="audio/mpeg">
+</audio>
+
+<!-- Pages -->
+<div id="page1" class="page active">
+  <h1>🎉 Happy Birthday – عيد ميلاد سعيد – Joyeux Anniversaire – Feliz Cumpleaños-  해피 버스데이 프린세스 (Haepi Beoseudei Peurinseseu) hahya ta b l korea hshshshshshshhs- 🎉</h1>
+  <p>Luna, I prepared something special for you. Would you like to open your gift princess?(eafak qoli ah <: w mtnsaych tkhdmi lmosiqa lfoq) </p>
+  <button onclick="nextPage(2)">Yes, I accept the gift ❤️</button>
+  <button onclick="nextPage(5)">No :(</button>
+</div>
+
+<div id="page2" class="page">
+  <h1>❤️ For Luna ❤️</h1>
+  <img class="page-img" src="luna1.jpeg" alt="Girlfriend Example">
+  <p>"Happy 20th birthdaaaaay Lunaah, wish y all the best n ur whole life w bchma tminiti yrbi.."</p>
+  <button onclick="nextPage(3)">Next ➜</button>
+</div>
+
+<div id="page3" class="page">
+  <h1>✨ A Message for You ✨</h1>
+  <img class="page-img" src="luna2.jpeg" alt="Girlfriend Example">
+  <p>"Ik hdchi mchi chi haja wlkn I hope u accept it luna, Wishing you a fantastic 20th birthday! May this year bring you strength, confidence, and everything you aim for. Keep shining ♥."</p>
+  <button onclick="nextPage(4)">Next ➜</button>
+</div>
+
+<div id="page4" class="page">
+  <h1>🌙 Luna, daa moon 🌙</h1>
+  <img class="page-img" src="luna3.jpeg" alt="Girlfriend Example">
+  <p>"I hope this year brings you happiness, success, love, and everything your beautiful heart desires, w theqeqi gae dkchi li bagha inchaalah yrbi. Happy Birthday angel."</p>
+  <button onclick="nextPage(1)">Back to Start</button>
+</div>
+
+<div id="page5" class="page">
+  <h1>😢 Oh… No?</h1>
+  <p>Even if you don’t accept the gift… I still wish you the happiest birthday angel, Luna. You deserve the whole world.</p>
+  <button onclick="nextPage(1)">Go Back</button>
+</div>
+
+<script>
+function nextPage(n){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page'+n).classList.add('active');
+}
+
+// Emoji falling
+const emojis = ['💖','❤️','🐱'];
+for(let i=0; i<40; i++){
+  const span = document.createElement('span');
+  span.className = 'emoji';
+  span.style.left = Math.random()*100 + 'vw';
+  span.style.fontSize = (20 + Math.random()*25) + 'px';
+  span.style.animationDuration = (5 + Math.random()*6) + 's';
+  span.textContent = emojis[Math.floor(Math.random()*emojis.length)];
+  document.body.appendChild(span);
+}
+
+// Music play button
+const audio = document.getElementById('birthdayAudio');
+const btn = document.getElementById('playMusic');
+btn.addEventListener('click', () => {
+  audio.play();
+  btn.style.display = 'none';
+});
+</script>
+
+</body>
+</html>
